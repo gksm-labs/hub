@@ -1,0 +1,38 @@
+sk:
+  doorkeeper:
+    errors:
+      messages:
+        access_denied: "Vlastník zdroja alebo autorizačný server zamietol požiadavku."
+        bad_request: "Požiadavka nemá povinný parameter, obsahuje nepodporovanú hodnotu parametra, alebo je inak poškodená."
+        invalid_client: "Overenie klienta zlyhalo kvôli neznámemu klientovi, bez priloženia overenia klienta, alebo s nepodporovanou metódou overenia."
+        invalid_grant: "Poskytnuté overenie prístupu je neplatné, expirované, zrušené, nezhoduje sa s presmerovacím URI v autorizačnej žiadosti, alebo bolo udelené inému klientovi."
+        invalid_redirect_uri: "Zahrnuté presmerovacie URI je neplatné."
+        invalid_request: "Požiadavka nemá povinný parameter, obsahuje nepodporovanú hodnotu parametra, alebo je inak poškodená."
+        invalid_resource_owner: "Poskytnuté prihlasovacie údaje sú neplatné, alebo sa vlastníka zdroja nepodarilo nájsť."
+        invalid_scope: "Požadovaný rozsah prístupu je neplatný, neznámy, alebo poškodený."
+        invalid_token: "Prístupový token je neplatný, expirovaný, alebo zrušený."
+        server_error: "Autorizačný server narazil na neočakávanú chybu, ktorá mu zabránila splniť požiadavku."
+        temporarily_unavailable: "Autorizačný server momentálne nedokáže spracovať požiadavku kvôli dočasnému preťaženiu alebo údržbe servera."
+        unauthorized_client: "Klient nie je oprávnený vykonávať túto požiadavku pomocou tejto metódy."
+        unsupported_grant_type: "Tento typ overenia prístupu nie je autorizačným serverom podporovaný."
+        unsupported_response_type: "Autorizačný server nepodporuje získanie tohto typu odozvy."
+    flash:
+      applications:
+        create:
+          notice: "Aplikácia bola vytvorená."
+        destroy:
+          notice: "Aplikácia bola vymazaná."
+        update:
+          notice: "Aplikácia bola upravená."
+      authorized_applications:
+        destroy:
+          notice: "Prístup aplikácie bol zrušený."
+    applications:
+      buttons:
+        edit: "Upraviť"
+        destroy: "Zmazať"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
+        authorize: "Autorizovať"
+      confirmations:
+        destroy: "Ste si absolútne istý?"

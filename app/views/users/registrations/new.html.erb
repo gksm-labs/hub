@@ -1,0 +1,45 @@
+<div class="max-w-md mx-auto mt-10 bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+  <h2 class="text-3xl font-bold text-slate-900 mb-6 text-center">Registrácia</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-5" }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :first_name, "Meno", class: "block text-sm font-medium text-slate-700 mb-1" %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", class: "form-input" %>
+      </div>
+
+      <div>
+        <%= f.label :last_name, "Priezvisko", class: "block text-sm font-medium text-slate-700 mb-1" %>
+        <%= f.text_field :last_name, autocomplete: "family-name", class: "form-input" %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :email, class: "block text-sm font-medium text-slate-700 mb-1" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-input" %>
+    </div>
+
+    <div>
+      <%= f.label :password, "Heslo", class: "block text-sm font-medium text-slate-700 mb-1" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-input" %>
+      <% if @minimum_password_length %>
+        <p class="mt-1 text-xs text-slate-500">(Minimálne <%= @minimum_password_length %> znakov)</p>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Potvrdenie hesla", class: "block text-sm font-medium text-slate-700 mb-1" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input" %>
+    </div>
+
+    <div class="pt-2">
+      <%= f.submit "Zaregistrovať sa", class: "w-full btn-primary py-2.5 cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <div class="mt-6 text-center text-sm">
+    <%= render "users/shared/links" %>
+  </div>
+</div>

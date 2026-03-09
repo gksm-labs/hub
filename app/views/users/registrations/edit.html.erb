@@ -1,0 +1,124 @@
+<div class="max-w-4xl mx-auto mt-8 px-4 sm:px-0">
+  <div class="mb-8 border-b border-slate-200 pb-6">
+    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Nastavenia účtu</h1>
+    <p class="mt-2 text-base text-slate-600">Spravujte svoje osobné údaje, heslá a zabezpečenie profilu.</p>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-8" }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="px-6 py-5 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
+        <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        <h2 class="text-lg font-semibold text-slate-900">Základné údaje</h2>
+      </div>
+
+      <div class="p-6 sm:p-8">
+        <div class="max-w-md space-y-5">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <%= f.label :first_name, "Meno", class: "block text-sm font-medium text-slate-700 mb-1" %>
+              <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", class: "form-input" %>
+            </div>
+
+            <div>
+              <%= f.label :last_name, "Priezvisko", class: "block text-sm font-medium text-slate-700 mb-1" %>
+              <%= f.text_field :last_name, autocomplete: "family-name", class: "form-input" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :email, "E-mailová adresa", class: "block text-sm font-medium text-slate-700 mb-1" %>
+            <%= f.email_field :email, autocomplete: "email", class: "form-input" %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div class="mt-4 text-sm text-amber-800 bg-amber-50 border border-amber-200 p-3 rounded-md flex items-start gap-2">
+              <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              Čaká sa na overenie novej e-mailovej adresy: <strong class="ml-1"><%= resource.unconfirmed_email %></strong>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <div class="px-6 py-5 border-b border-slate-100 bg-slate-50 flex items-center gap-3">
+        <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        <div>
+          <h2 class="text-lg font-semibold text-slate-900">Zmena hesla</h2>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-8">
+        <p class="text-sm text-slate-500 mb-6">Vyplňte iba v prípade, že si prajete zmeniť svoje súčasné heslo. Inak ponechajte prázdne.</p>
+
+        <div class="max-w-md space-y-5">
+          <div>
+            <%= f.label :password, "Nové heslo", class: "block text-sm font-medium text-slate-700 mb-1" %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-input placeholder-slate-300", placeholder: "Zadajte nové heslo" %>
+            <% if @minimum_password_length %>
+              <p class="mt-1.5 text-xs text-slate-500">Minimálna dĺžka je <%= @minimum_password_length %> znakov.</p>
+            <% end %>
+          </div>
+
+          <div>
+            <%= f.label :password_confirmation, "Potvrdenie nového hesla", class: "block text-sm font-medium text-slate-700 mb-1" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input placeholder-slate-300", placeholder: "Zopakujte nové heslo" %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-blue-50/50 rounded-xl border border-blue-200 overflow-hidden">
+      <div class="p-6 sm:p-8">
+        <div class="max-w-xl">
+          <h2 class="text-lg font-semibold text-blue-900 mb-2">Potvrdenie zmien</h2>
+          <p class="text-sm text-blue-800/80 mb-5">Z bezpečnostných dôvodov musíte pre uloženie akýchkoľvek zmien (vrátane zmeny emailu) zadať svoje súčasné heslo.</p>
+
+          <div class="max-w-md mb-6">
+            <%= f.label :current_password, "Súčasné heslo", class: "block text-sm font-medium text-blue-900 mb-1" %>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: "form-input border-blue-300 focus:border-blue-600 focus:ring-blue-600 bg-white" %>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <%= f.submit "Uložiť nastavenia", class: "btn-primary cursor-pointer px-6 py-2.5" %>
+            <%= link_to "Zrušiť", :back, class: "text-sm font-medium text-slate-500 hover:text-slate-800 transition" %>
+          </div>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
+  <section class="mt-12 bg-white rounded-xl shadow-sm border border-red-200 overflow-hidden mb-12">
+    <div class="px-6 py-5 border-b border-red-100 bg-red-50/50 flex items-center gap-3">
+      <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <h2 class="text-lg font-semibold text-red-800">Nebezpečná zóna</h2>
+    </div>
+
+    <div class="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div>
+        <h3 class="font-bold text-slate-900">Zmazanie účtu</h3>
+        <p class="text-sm text-slate-500 mt-1 max-w-lg">
+          Nenávratne odstráni váš účet, všetky priradené OAuth prístupy a dáta.
+          Túto akciu nie je možné vrátiť späť.
+        </p>
+      </div>
+      <div class="shrink-0">
+        <%= button_to "Zmazať môj účet", registration_path(resource_name),
+                      data: { confirm: "Ste si absolútne istý? Váš účet bude nenávratne zmazaný.", turbo_confirm: "Ste si absolútne istý? Váš účet bude nenávratne zmazaný." },
+                      method: :delete,
+                      class: "btn-danger cursor-pointer whitespace-nowrap px-6 py-2.5" %>
+      </div>
+    </div>
+  </section>
+</div>

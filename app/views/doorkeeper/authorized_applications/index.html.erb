@@ -1,0 +1,57 @@
+<div class="max-w-5xl mx-auto mt-8 px-4 sm:px-0">
+  <div class="mb-8 border-b border-slate-200 pb-6">
+    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Prepojené služby</h1>
+    <p class="mt-2 text-base text-slate-600 max-w-2xl">
+      Aplikácie, ktorým ste povolili prístup k vášmu školskému účtu. Ak službu už nepoužívate, pre vašu bezpečnosť jej zrušte prístup.
+    </p>
+  </div>
+
+  <% if @applications.empty? %>
+    <div class="bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 p-12 flex flex-col items-center justify-center text-center">
+      <div class="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center text-slate-400 mb-4">
+        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-slate-900">Zatiaľ čisto</h3>
+      <p class="mt-1 text-slate-500 max-w-sm">Váš účet zatiaľ nie je prepojený so žiadnymi externými aplikáciami.</p>
+    </div>
+  <% else %>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% @applications.each do |application| %>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col transition-all hover:shadow-md hover:border-slate-300">
+
+          <!-- Hlavička karty s ikonou -->
+          <div class="p-6 flex items-start gap-4 flex-grow">
+            <!-- Vygenerovaná "ikona" z prvého písmena -->
+            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white font-bold text-xl shadow-inner shrink-0">
+              <%= application.name.first.upcase %>
+            </div>
+
+            <div class="min-w-0">
+              <h3 class="font-bold text-slate-900 truncate" title="<%= application.name %>">
+                <%= application.name %>
+              </h3>
+              <p class="text-xs text-slate-500 mt-1">
+                Autorizované:<br>
+                <span class="font-medium text-slate-700"><%= application.created_at.strftime('%d. %m. %Y') %></span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Tlačidlo na zrušenie prístupu na spodku karty -->
+          <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end rounded-b-xl">
+            <%= form_tag oauth_authorized_application_path(application), method: :delete, class: "m-0" do %>
+              <button type="submit"
+                      data-turbo-confirm="Naozaj chcete zrušiť prístup aplikácii <%= application.name %>? Budete sa do nej musieť znova prihlásiť."
+                      class="text-sm font-semibold text-red-600 hover:text-red-800 transition cursor-pointer">
+                Zrušiť prístup
+              </button>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

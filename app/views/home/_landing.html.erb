@@ -1,0 +1,30 @@
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-start md:justify-center <%= user_signed_in? ? 'pt-8 pb-8' : 'pt-12 pb-24 md:min-h-[70vh]' %>">
+  <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-primary/10 mb-8 shadow-inner">
+    <svg class="w-12 h-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+    </svg>
+  </div>
+
+  <h1 class="text-5xl sm:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
+    Hub
+  </h1>
+
+  <p class="text-xl sm:text-2xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+    Jednotné a bezpečné prihlásenie pre všetky aplikácie a služby.
+  </p>
+
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+    <% if user_signed_in? %>
+      <a href="<%= edit_user_registration_path %>" class="inline-flex justify-center items-center rounded-xl bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 w-full sm:w-auto">
+        Spravovať účet
+      </a>
+    <% else %>
+      <a href="<%= new_user_session_path %>" class="inline-flex justify-center items-center rounded-xl bg-primary px-8 py-4 text-lg font-bold text-white transition-all hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 w-full sm:w-auto">
+        Prihlásiť sa
+      </a>
+      <a href="<%= new_user_registration_path %>" class="inline-flex justify-center items-center rounded-xl bg-white border-2 border-slate-200 px-8 py-4 text-lg font-bold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 w-full sm:w-auto">
+        Vytvoriť účet
+      </a>
+    <% end %>
+  </div>
+</div>

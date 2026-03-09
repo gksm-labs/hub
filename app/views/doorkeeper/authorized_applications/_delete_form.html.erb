@@ -1,0 +1,5 @@
+<%= form_tag oauth_authorized_application_path(application), method: :delete, class: "m-0" do %>
+  <%= submit_tag "Zrušiť prístup",
+                 onclick: "return confirm('Naozaj chcete zrušiť prístup aplikácii #{application.name}? Budete sa do nej musieť znova prihlásiť.')",
+                 class: "text-sm font-semibold text-red-600 hover:text-red-800 transition cursor-pointer bg-transparent border-0 p-0" %>
+<% end %>

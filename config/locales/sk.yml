@@ -1,0 +1,21 @@
+sk:
+  activerecord:
+    attributes:
+      user:
+        first_name: "Meno"
+        last_name: "Priezvisko"
+        email: "E-mail"
+        password: "Heslo"
+        password_confirmation: "Potvrdenie hesla"
+        current_password: "Aktuálne heslo"
+  errors:
+    messages:
+      blank: "nemôže byť prázdne"
+      too_short:
+        one: "je príliš krátke (minimum je 1 znak)"
+        few: "je príliš krátke (minimum sú %{count} znaky)"
+        many: "je príliš krátke (minimum je %{count} znakov)"
+        other: "je príliš krátke (minimum je %{count} znakov)"
+      confirmation: "sa nezhoduje s potvrdením"
+      invalid: "je neplatné"
+      taken: "už sa používa"

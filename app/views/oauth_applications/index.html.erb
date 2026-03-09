@@ -1,0 +1,39 @@
+<div class="mb-8 flex items-center justify-between">
+  <div>
+    <h1 class="text-3xl font-bold text-slate-900">Aplikácie</h1>
+    <p class="mt-2 text-sm text-slate-600">Spravujte svoje OAuth aplikácie a ich prístupové kľúče.</p>
+  </div>
+  <%= link_to "Nová Aplikácia", new_oauth_application_path, class: 'btn-primary' %>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50">
+    <tr>
+      <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Názov</th>
+      <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Callback URL</th>
+      <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Akcie</th>
+    </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-slate-200">
+    <% @applications.each do |application| %>
+      <tr class="hover:bg-slate-50 transition">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
+          <%= link_to application.name, oauth_application_path(application), class: "hover:underline" %>
+        </td>
+        <td class="px-6 py-4 text-sm text-slate-500 truncate max-w-xs">
+          <%= application.redirect_uri %>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end gap-3">
+          <%= link_to 'Upraviť', edit_oauth_application_path(application), class: 'text-slate-600 hover:text-blue-600' %>
+          <%= render 'delete_form', application: application %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% if @applications.empty? %>
+    <div class="p-8 text-center text-slate-500">Zatiaľ nemáte vytvorené žiadne aplikácie.</div>
+  <% end %>
+</div>

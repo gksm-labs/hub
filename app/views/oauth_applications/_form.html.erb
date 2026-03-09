@@ -1,0 +1,43 @@
+<%= form_for application, url: doorkeeper_submit_path(application), html: { class: "space-y-6 bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-slate-100" } do |f| %>
+  <% if application.errors.any? %>
+    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+      <ul class="list-disc list-inside text-sm">
+        <% application.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "Názov aplikácie", class: "block text-sm font-medium text-slate-700 mb-1" %>
+    <%= f.text_field :name, class: "form-input" %>
+  </div>
+
+  <div>
+    <%= f.label :redirect_uri, "Redirect URI", class: "block text-sm font-medium text-slate-700 mb-1" %>
+    <%= f.text_area :redirect_uri, rows: 4, class: "form-input font-mono text-sm" %>
+    <p class="mt-1 text-xs text-slate-500">Jedna URI adresa na riadok.</p>
+  </div>
+
+  <div class="flex items-start">
+    <div class="flex items-center h-5">
+      <%= f.check_box :confidential, class: "h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-600" %>
+    </div>
+    <div class="ml-3 text-sm">
+      <%= f.label :confidential, "Dôverná aplikácia (Confidential)", class: "font-medium text-slate-700" %>
+      <p class="text-slate-500">Vyberte, ak viete udržať 'Client Secret' v bezpečí (odškrtnite pre mobilné aplikácie a SPA).</p>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :scopes, "Scopes (Rozsah oprávnení)", class: "block text-sm font-medium text-slate-700 mb-1" %>
+    <%= f.text_field :scopes, class: "form-input" %>
+    <p class="mt-1 text-xs text-slate-500">Oddeľte medzerou. Nechajte prázdne pre predvolené hodnoty.</p>
+  </div>
+
+  <div class="pt-4 flex gap-3">
+    <%= f.submit "Uložiť", class: "btn-primary cursor-pointer" %>
+    <%= link_to "Zrušiť", oauth_applications_path, class: "btn-secondary" %>
+  </div>
+<% end %>

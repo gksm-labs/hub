@@ -1,0 +1,6 @@
+<%= render 'landing' %>
+
+<% if user_signed_in? %>
+  <div class="border-t border-slate-200/60 my-4"></div>
+  <%= render 'dashboard' %>
+<% end %>

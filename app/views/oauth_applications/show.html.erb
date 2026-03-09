@@ -1,0 +1,56 @@
+<div class="max-w-4xl mx-auto mt-8">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <h1 class="text-3xl font-bold text-slate-900"><%= @application.name %></h1>
+    <div class="flex gap-3">
+      <%= link_to "Upraviť", edit_oauth_application_path(@application), class: 'btn-secondary' %>
+      <%= render 'delete_form', application: @application %>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+    <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
+      <h3 class="text-lg font-medium text-slate-900">API Credentials</h3>
+    </div>
+    <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-1 text-sm font-medium text-slate-500">Client ID (UID)</div>
+      <div class="md:col-span-2">
+        <code class="bg-slate-100 text-slate-800 px-3 py-1.5 rounded-md text-sm block break-all font-mono border border-slate-200"><%= @application.uid %></code>
+      </div>
+
+      <div class="md:col-span-1 text-sm font-medium text-slate-500">Client Secret</div>
+      <div class="md:col-span-2">
+        <code class="bg-slate-100 text-slate-800 px-3 py-1.5 rounded-md text-sm block break-all font-mono border border-slate-200"><%= @application.secret %></code>
+      </div>
+
+      <div class="md:col-span-1 text-sm font-medium text-slate-500">Scopes</div>
+      <div class="md:col-span-2 text-sm text-slate-900">
+        <%= @application.scopes.presence || "<em class='text-slate-400'>Predvolené</em>".html_safe %>
+      </div>
+
+      <div class="md:col-span-1 text-sm font-medium text-slate-500">Dôverná (Confidential)</div>
+      <div class="md:col-span-2 text-sm text-slate-900">
+        <%= @application.confidential ? "Áno" : "Nie" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="px-6 py-5 border-b border-slate-200 bg-slate-50">
+      <h3 class="text-lg font-medium text-slate-900">Callback URLs</h3>
+    </div>
+    <div class="p-0">
+      <table class="min-w-full divide-y divide-slate-200">
+        <tbody class="divide-y divide-slate-200">
+        <% @application.redirect_uri.split.each do |uri| %>
+          <tr class="hover:bg-slate-50">
+            <td class="px-6 py-4 text-sm font-mono text-slate-700 break-all"><%= uri %></td>
+            <td class="px-6 py-4 text-right whitespace-nowrap">
+              <%= link_to "Test Autorizácie", oauth_authorization_path(client_id: @application.uid, redirect_uri: uri, response_type: 'code', scope: @application.scopes), class: 'text-sm text-blue-600 hover:text-blue-800 font-medium', target: '_blank' %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
