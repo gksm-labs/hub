@@ -1,6 +1,6 @@
 class OauthApplicationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :require_oauth_admin!
+  require_permission :manage_oauth
   before_action :set_application, only: %i[show edit update destroy]
 
   def index
@@ -47,12 +47,7 @@ class OauthApplicationsController < ApplicationController
 
   private
 
-  def require_oauth_admin!
-    unless current_user.has_permission?(:manage_oauth)
-      flash[:alert] = "You are not authorized to manage OAuth applications."
-      redirect_to root_path
-    end
-  end
+
 
   def set_application
     @application = Doorkeeper::Application.find(params[:id])

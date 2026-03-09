@@ -1,0 +1,47 @@
+<div class="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+  <div class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-900">Používatelia</h1>
+      <p class="mt-2 text-sm text-slate-600">Spravujte používateľov, ich roly a prístup do systému.</p>
+    </div>
+    <%= link_to "Nový používateľ", new_admin_user_path, class: 'btn-primary' %>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="min-w-full divide-y divide-slate-200">
+      <thead class="bg-slate-50">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Meno a Priezvisko</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">E-mail</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Rola</th>
+        <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Akcie</th>
+      </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-slate-200">
+      <% @users.each do |user| %>
+        <tr class="hover:bg-slate-50 transition">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+            <%= user.display_name %>
+          </td>
+          <td class="px-6 py-4 text-sm text-slate-500 truncate max-w-xs">
+            <%= user.email %>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 capitalize">
+              <%= user.role %>
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex justify-end gap-3">
+            <%= link_to 'Upraviť', edit_admin_user_path(user), class: 'text-slate-600 hover:text-blue-600' %>
+            <%= button_to 'Vymazať', admin_user_path(user), method: :delete, data: { confirm: 'Ste si istý?', turbo_confirm: 'Ste si istý?' }, class: 'text-red-600 hover:text-red-900 cursor-pointer' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+    <% if @users.empty? %>
+      <div class="p-8 text-center text-slate-500">Zatiaľ nemáte vytvorených žiadnych používateľov.</div>
+    <% end %>
+  </div>
+</div>

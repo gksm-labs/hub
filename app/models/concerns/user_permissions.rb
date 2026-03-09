@@ -2,13 +2,15 @@ module UserPermissions
   extend ActiveSupport::Concern
 
   ROLE_PERMISSIONS = {
+    user: [ :update_name, :update_email ],
     student: [],
-    teacher: [],
-    admin: [:manage_oauth, :manage_users, :admin]
+    teacher: [ :update_name, :update_email ],
+    admin: [ :manage_oauth, :manage_users, :admin ]
   }.freeze
 
   included do
     enum :role, {
+      user: "user",
       student: "student",
       teacher: "teacher",
       admin: "admin"

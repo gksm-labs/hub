@@ -7,12 +7,24 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <a href="<%= oauth_applications_path %>" class="group relative block bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:border-primary hover:shadow-md transition duration-300 overflow-hidden">
-      <div class="absolute right-0 top-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-slate-50 group-hover:bg-primary/5 transition duration-300"></div>
-      <div class="relative z-10">
-        <h2 class="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors mb-3">Správa OAuth Aplikácií</h2>
-        <p class="text-slate-600 leading-relaxed">Vytváranie a úprava globálnych aplikácií s prístupom do Hubu cez OAuth2.</p>
-      </div>
-    </a>
+    <% if current_user.has_permission?(:manage_oauth) %>
+      <a href="<%= oauth_applications_path %>" class="group relative block bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:border-primary hover:shadow-md transition duration-300 overflow-hidden">
+        <div class="absolute right-0 top-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-slate-50 group-hover:bg-primary/5 transition duration-300"></div>
+        <div class="relative z-10">
+          <h2 class="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors mb-3">Správa OAuth Aplikácií</h2>
+          <p class="text-slate-600 leading-relaxed">Vytváranie a úprava globálnych aplikácií s prístupom do Hubu cez OAuth2.</p>
+        </div>
+      </a>
+    <% end %>
+
+    <% if current_user.has_permission?(:manage_users) %>
+      <a href="<%= admin_users_path %>" class="group relative block bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:border-primary hover:shadow-md transition duration-300 overflow-hidden">
+        <div class="absolute right-0 top-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-slate-50 group-hover:bg-primary/5 transition duration-300"></div>
+        <div class="relative z-10">
+          <h2 class="text-2xl font-bold text-slate-900 group-hover:text-primary transition-colors mb-3">Správa Používateľov</h2>
+          <p class="text-slate-600 leading-relaxed">Správa účtov, rolí a základných údajov používateľov v systéme.</p>
+        </div>
+      </a>
+    <% end %>
   </div>
 </div>

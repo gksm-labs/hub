@@ -10,6 +10,9 @@
 
     <div class="hidden md:flex items-center gap-4">
       <% if user_signed_in? %>
+        <% if current_user.has_permission?(:admin) || current_user.has_permission?(:manage_oauth) || current_user.has_permission?(:manage_users) %>
+          <%= link_to "Admin", admin_path, class: "text-white hover:text-white/80 transition-colors font-medium" %>
+        <% end %>
         <%= button_to "Odhlásiť sa", destroy_user_session_path, method: :delete, class: "btn-outline inline-flex" %>
       <% else %>
         <a href="<%= new_user_session_path %>" class="btn-red group relative inline-flex overflow-hidden">
@@ -19,7 +22,6 @@
       <% end %>
     </div>
 
-    <!-- Mobile menu button -->
     <button
       type="button"
       data-mobile-menu-target="button"
@@ -31,7 +33,6 @@
       Menu
     </button>
 
-    <!-- Mobile menu panel -->
     <div
       data-mobile-menu-target="menu"
       class="pointer-events-none fixed inset-0 bg-primary/95 backdrop-blur-sm opacity-0 transition-opacity duration-100 md:hidden"
@@ -52,8 +53,11 @@
           </button>
         </div>
 
-        <div class="mt-auto pt-10">
+        <div class="mt-auto pt-10 flex flex-col gap-4">
           <% if user_signed_in? %>
+            <% if current_user.has_permission?(:admin) || current_user.has_permission?(:manage_oauth) || current_user.has_permission?(:manage_users) %>
+              <%= link_to "Admin", admin_path, class: "text-center text-white hover:text-white/80 font-medium py-2" %>
+            <% end %>
             <%= button_to "Odhlásiť sa", destroy_user_session_path, method: :delete, class: "btn-outline w-full !py-3 text-base justify-center" %>
           <% else %>
             <a

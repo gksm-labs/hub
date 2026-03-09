@@ -35,4 +35,4 @@ sk:
         cancel: "Zrušiť"
         authorize: "Autorizovať"
       confirmations:
-        destroy: "Ste si absolútne istý?"
+        destroy: "Ste si istý?"

@@ -7,7 +7,7 @@ sk:
         email: "E-mail"
         password: "Heslo"
         password_confirmation: "Potvrdenie hesla"
-        current_password: "Aktuálne heslo"
+        current_password: "Súčasné heslo"
   errors:
     messages:
       blank: "nemôže byť prázdne"
@@ -19,3 +19,5 @@ sk:
       confirmation: "sa nezhoduje s potvrdením"
       invalid: "je neplatné"
       taken: "už sa používa"
+      cant_change: "nemôžete zmeniť"
+      missing_permissions: "Na túto akciu nemáte oprávnenie."
